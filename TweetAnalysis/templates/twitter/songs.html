@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block head %}
+{% load static %}
+    <link href="{% static 'twitter/css/movies.css' %}" rel="stylesheet">  
+{% endblock head %}
+{% block body %} 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Tweet Analysis</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'movies' %}">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'songs' %}">Songs</a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav navbar-right">
+        <a href="https://datastudio.google.com/reporting/268a7b8f-b663-4abd-b7cc-c333ded3f4c1" class="btn btn-primary mr-3" role="button" target="_blank" style="background-color: aliceblue;color: black;">Analysis Dashboard</a> 
+    
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="background-color: aliceblue;color: black;">Get Trending List</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Trending Songs List</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+    
+                    <div class="modal-body">
+                        <span>You will be mailed top 2 trending songs having highest percentage of positive reviews in twitter.</span>
+    
+                      <form method="GET" action="">
+                        <div class="form-group">
+    
+                          <label for="recipient-name" class="col-form-label">Enter email:</label>
+                          <input type="email" class="form-control" id="email-name" name="user_email">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+        </div>
+</nav>
+
+<br>
+<!-- <div class="container" style="margin-left: 200px;margin-right: 200px;"> -->
+    <div class="row" style="padding: 30px;">
+        {% for song_name, tweets in songs_tweets.items %}
+        <br>
+        <br>
+        <br>
+        <div class="col-md-6" >
+            <div class="panel-heading">
+                <center><h3 class="panel-title">{{song_name}}</h3></center>
+                <ul class="list-group list-group-dividered list-group-full" style="height: 500px;overflow: scroll;">
+                    {% for tweet in tweets %}  
+                    <li class="list-group-item" >
+                        <a class="avatar avatar-online" href="javascript:void(0)">
+                            <img src={{tweet.3}} alt="...">
+                            <i></i>
+                        </a>
+                        <div class="media-body">
+                        <h4 class="media-heading">{{tweet.2}}</h4>
+                        <div>{{tweet.0}}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    <br>
+                    <br>
+                </ul>
+                <br>
+                <br>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+        <br>
+    </div>
+
+<!-- </div> -->
+
+{% endblock body %}

@@ -1,0 +1,7 @@
+Django==3.2
+tweepy
+textblob
+spotipy
+tmdbv3api
+google-cloud-bigquery
+google-cloud-pubsub
