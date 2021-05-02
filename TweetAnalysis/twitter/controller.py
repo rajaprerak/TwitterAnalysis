@@ -18,16 +18,16 @@ tz = timezone('MST')
 
 path = os.getcwd()
 # parent_dir = os.path.abspath(os.path.join(path, os.pardir))
-cc_proj_key_path = os.path.join(path, "cc-project-2-key.json")
+# cc_proj_key_path = os.path.join(path, "cc-project-2-key.json")
 # f = open(cc_proj_key_path)
 # print(f)
 
-print(cc_proj_key_path)
+# print(cc_proj_key_path)
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = cc_proj_key_path
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = cc_proj_key_path
 
-publisher = pubsub_v1.PublisherClient()
-topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
+# publisher = pubsub_v1.PublisherClient()
+# topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
 
 
 def init_api():
@@ -103,7 +103,7 @@ def get_trending_movie_sentiments():
             output = {"name":movie_name,"tweet":tweet_extended,"sentiment":get_tweet_sentiment(tweet_extended),"category":"movie","date":str(d.date())}
             pubsub_output = json.dumps(output)
             data = str(pubsub_output)
-            publisher.publish(topic_path, data.encode("utf-8"))
+            # publisher.publish(topic_path, data.encode("utf-8"))
 
         movies_tweets[movie_name] = tweet_text
         
@@ -158,7 +158,7 @@ def get_trending_songs_sentiments():
             output = {"name":search_words,"tweet":tweet_extended,"sentiment":get_tweet_sentiment(tweet_extended),"category":"song","date":str(d.date())}
             pubsub_output = json.dumps(output)
             data = str(pubsub_output)
-            publisher.publish(topic_path, data.encode("utf-8"))
+            # publisher.publish(topic_path, data.encode("utf-8"))
         songs_tweets[search_words] = tweet_text
         
     return songs_tweets
@@ -183,7 +183,7 @@ def test_autoscaling():
             output = {"name":movie_name,"tweet":tweet_extended,"sentiment":get_tweet_sentiment(tweet_extended),"category":"movie","date":str(d.date())}
             pubsub_output = json.dumps(output)
             data = str(pubsub_output)
-            publisher.publish(topic_path, data.encode("utf-8"))
+            # publisher.publish(topic_path, data.encode("utf-8"))
 
         movies_tweets[movie_name] = tweet_text
         movie_tweets_all.append(tweet_text)
