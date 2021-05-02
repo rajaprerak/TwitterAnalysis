@@ -5,7 +5,6 @@
 *.xml
 *.iml
 *.jpg
-*.png
 ### Django ###
 *.log
 *.pot
